@@ -1,4 +1,7 @@
-Hilfreiche Informationen zum Spielen:
+## Play here:
+https://tilonator.itch.io/nuklear-strike
+
+## Hilfreiche Informationen zum Spielen:
 
 Haus -> Erhöht die Bevölkerungskapazität
 Gelbes Feld -> Weizenfeld (Nahrungsproduktion)
@@ -30,6 +33,7 @@ Kommende Changelogs:
 
 Changelog: 
 -Ein Gebäude, das bei Erbauen den Sieg einleitet. || Erhöhte Spielschwierigkeit (höhere Komplexität) ✔ (06.01.2022)
+
 
 
 
