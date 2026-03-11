@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NuklearStrike</title>
+		<link rel="stylesheet" href="src/CSS/style.css">
+	</head>
+	<body>
+		<!--------------------------------------------------										
+		-------------User Tools (obere Leiste)
+		--------------------------------------------------->
+		<button onclick="scoutForLand()">Explore</button>
+		<input type="number" placeholder="buy amount" id="buyAmount">
+		<br> 
+		
+		<textarea rows="2" cols="30" id="recentEvents"></textarea>
+		<br>
+
+
+		<!--------------------------------------------------										
+		-------------Spielbrett und -Mechanik
+		--------------------------------------------------->
+		<div id="Spielbrett">
+
+			<script src="src/JS/main.js"> 
+			</script>
+
+
+			<footer>
+				<button onclick="endTurn()" id="endTurn-btn">End your Turn</button>
+
+				<!--------------------------------------------------										
+				---------------BuildingSelectContainer
+				--------------------------------------------------->
+				
+				<!--Der BuildingSelectContainer dient zur Auswahl der Bauwerke. Um zwischen diesen Bauwerken zu unterscheiden 
+				    enthält der BuildingSelectContainer 5 braune Kästchen, gefüllt mit Abbildern dieser Bauwerke.
+					Klickt man nun auf ein Kästchen mit einem Bauwerk wählt man dieses für den nächsten Bau, der mit einem Klick
+					der linken Maustaste auf ein freies Feld eingeleitet wird.
+					
+					Im Folgenden werden diese Abbilder in HTML definiert und in CSS geformt.
+				-->
+				
+				<!--Rechteck mit 5 Kästchen-->
+				<div class="buildingSelectContainer">
+					<!--Kästchen 1-->
+					<div class="buildingBox" onclick="buyHouseMode()">
+						<!-- Haus -->
+						<div id="house" style="margin: 50px 0 0 0;">
+							<div id="front">
+								<span class="roof"></span>
+								<span class="triangle"></span>
+								<span class="sidewall"></span>
+								<div class="wall">
+									<span id="top-window"></span>
+									<span id="middle-window"></span>
+									<span id="door"></span>
+								</div>
+							</div>
+							<div id="garage">
+								<span class="roof"></span>
+								<span class="triangle"></span>
+								<span class="sidewall"></span>
+								<div class="wall"></div>
+							</div>
+						</div>
+
+						<label class="costLabel">100 Gold 50 Wood 20 Stone</label>
+					</div>
+
+					<!--Kästchen 2-->
+					<div class="buildingBox" onclick="buyLandMode()" id="feldBox">
+					
+						<label class="costLabel">20 Gold</label>
+						<!-- Feld -->
+						<div class="hexagon" id="feldProp">
+							<div class="hexagon-top-row">
+								<div class="f-left"></div>
+								<div class="f-right"></div>
+							</div>
+							<div class="hexagon-bottom-row">
+								<div class="f-bottom-left"></div>
+								<div class="f-bottom-right"></div>
+							</div>
+						</div>
+
+						
+					</div>
+
+					<!--Kästchen 3-->
+					<div class="buildingBox" onclick="buyForesterMode()">
+					
+						<label class="costLabel">20 Gold</label>
+						
+						<!-- Forester -->
+						<div class="hexagon" id="foresterProp">
+							<div class="hexagon-top-row">
+								<div class="for-left"></div> <!--"for" steht hier für Forest-->
+								<div class="for-right"></div>
+							</div>
+							<div class="hexagon-bottom-row">
+								<div class="for-bottom-left"></div>
+								<div class="for-bottom-right"></div>
+							</div>
+						</div>
+					</div>
+
+					<!--Kästchen 4-->
+					<div class="buildingBox" onclick="buyQuarryMode()">
+					
+						<label class="costLabel">200 Gold</label>
+						
+						<!-- Quarry -->
+						<div class="hexagon" id="quarryProp">
+							<div class="hexagon-top-row">
+								<div class="qua-left"></div> <!--"qua" steht hier für Quarry-->
+								<div class="qua-right"></div>
+							</div>
+							<div class="hexagon-bottom-row">
+								<div class="qua-bottom-left"></div>
+								<div class="qua-bottom-right"></div>
+							</div>
+						</div>
+
+						
+					</div>
+					
+					<!--Kästchen 5-->
+					<div class="buildingBox" onclick="buyWonderMode()">
+					
+						<label class="costLabel">1000 von jeder Resource</label>
+						
+						<!-- Winning Wonder -->
+
+						<div class="hexagon" id="wonderProp">
+							<div class="hexagon-top-row">
+								<div class="won-left"></div> <!--"won" steht hier für Wonder-->
+								<div class="won-right"></div>
+							</div>
+							<div class="hexagon-bottom-row">
+								<div class="won-bottom-left"></div>
+								<div class="won-bottom-right"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>			
+		</div>
+	</body>
+</html>

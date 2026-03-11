@@ -1,4 +1,7 @@
-//Kreierung des Spielfeldes und Resourcenanzeige
+//Im Skript wird das Spielfeld und die Resourcenanzeige definiert. Normaler Weise würden wir DIVS und Labels in HTML definieren,
+//ich definiere die Elemente bei der kreierung in JS schon als Variable die ich im ganzen Skript benutze, somit spart man sich ein
+//Programmierschritt, -sprache und Datei. Ist aber eigentlich nur Geschmackssache und meine Faulheit (Effizienz).
+
 			//Zähl Variablen
 			let column_3_Count = 0;
 			let column_4_Count = 0;
@@ -19,7 +22,8 @@
 			let popCap = 8
 			let turn = 0
 
-			let goldModifier = 1
+			//Die Modifier bestimmen die Änderung der Resourcen nach Rundenende
+			let goldModifier = 1 
 			let foodModifier = 1
 			let stoneModifier = 0
 			let woodModifier = 0
@@ -37,6 +41,9 @@
 			//-----------------------------------------------------
 			//---------------Resourcen
 			//----------------------------------------------------
+			
+			//Besagte Resourcenanzeige mit Bildern zur Unterscheidung der Resourcen.
+			
 			var goldIcon = document.createElement("img")
 			goldIcon.src = "src/img/gold.png"
 			document.getElementById("Spielbrett").appendChild(goldIcon)
@@ -120,55 +127,72 @@
 			turnLabel.id = "turn"
 			turnLabel.classList.add("statistic");
 
-
-
+			//-----------------------------------------------------
+			//---------------Menü Button
+			//----------------------------------------------------
+			
+			var game_btn = document.createElement("button"); //Führt wieder zum Menü
+			game_btn.innerHTML = "Menu"
+			game_btn.classList.add("game-btn");
+			game_btn.onclick = function () {
+			  location.href='index.html'
+			};
+			document.getElementById("Spielbrett").appendChild(game_btn);
+			
+			//-----------------------------------------------------
+			//---------------Convenience und Mapspawning
+			//----------------------------------------------------
 
 			//Beim ersten Laden ausgeführt:
-			window.addEventListener("contextmenu", e => e.preventDefault()); //deaktiviert das ContextMenu
-			scoutForLand();
-
+			window.addEventListener("contextmenu", e => e.preventDefault()); //deaktiviert das ContextMenu (kommt Standardweise beim Rechstklicken)
+			
 			window.addEventListener("keypress", (e) => {
 				if(e.keyCode == 32 && e.target === document.body) { //deaktiviert Scrollen bei Space-Druck
 					e.preventDefault();      
 					endTurn();
 				}
 			})
+			
+			scoutForLand();													 //Deckt das erste Stück Land auf. (Erschafft das Spielfeld)																	
+
+			
 
 
 
 
-			//Prop Construction
+			//Deckt ein Stück(Seckseck aus Secksecken -> Magic) Land auf
 
 			function scoutForLand() {
 				
 				//Baut ein großes Sechseck aus 19 Sechsecken
 				var grid = document.createElement("DIV");
 				grid.id = "grid";
-				var column_3 = document.createElement("DIV");
+				var column_3 = document.createElement("DIV"); //Reihe 1 mit 3 Secksecken
 				grid.appendChild(column_3);    
 				column_3.id = "column-3";
 				
-				var column_4 = document.createElement("DIV");
+				var column_4 = document.createElement("DIV"); //Reihe 2 mit 4 Secksecken
 				grid.appendChild(column_4);    
 				column_4.id = "column-4"
 				
-				var column_5 = document.createElement("DIV");
+				var column_5 = document.createElement("DIV"); //Reihe 3 mit 5 Secksecken
 				grid.appendChild(column_5);    
 				column_5.id = "column-5";
 				
-				var column_4_0 = document.createElement("DIV");
+				var column_4_0 = document.createElement("DIV"); //Reihe 4 mit 4 Secksecken
 				grid.appendChild(column_4_0);    
 				column_4_0.id = "column-4-0";
 
 				
-				var column_3_0 = document.createElement("DIV");
+				var column_3_0 = document.createElement("DIV"); //Reihe 5 mit 3 Secksecken
 				grid.appendChild(column_3_0);    
 				column_3_0.id = "column-3-0";
 				
 				document.getElementById("Spielbrett").appendChild(grid);   
 				
+				//siehe Oben(Seckseckanzahl der jeweiligen Reihen: 3,4,5,4,3)
 				for (let i = 0; i < 3; i++) {
-					buildHexagon("column-3");}
+					buildHexagon("column-3");} 
 					
 				for (let i = 0; i < 4; i++) {
 					buildHexagon("column-4");}
@@ -183,13 +207,8 @@
 					buildHexagon("column-3-0");}
 			}
 
-
-
-			function spawnHexagon() {
-				let colInputField = document.getElementById("columnPos").value; //Holt den String aus dem Input Field
-				buildHexagon(colInputField) 
-			}
-
+			//Das jeweilige Hexagon wird zu einem Farmland 
+			//(erst kosmetisch; Diese Funktion wird von der Kauffunktion aufgerufen, die die tatsächlichen Resourcenberechnungen ändert.)
 			function convertIntoLand(pos) {
 				
 				
@@ -206,6 +225,9 @@
 				
 				//border style verändern
 			}
+			
+			//Das jeweilige Hexagon wird zu einem Wald mit Förster
+			//(erst kosmetisch; Diese Funktion wird von der Kauffunktion aufgerufen, die die tatsächlichen Resourcenberechnungen ändert.)
 			function convertIntoForest(pos) {
 				
 				
@@ -223,6 +245,8 @@
 				//border style verändern
 			}
 
+			//Das jeweilige Hexagon wird zu einem arbeitetem Steinbruch
+			//(erst kosmetisch; Diese Funktion wird von der Kauffunktion aufgerufen, die die tatsächlichen Resourcenberechnungen ändert.)
 			function convertIntoQuarry(pos) {
 				
 				
@@ -240,6 +264,9 @@
 				//border style verändern
 			}
 			
+			//Das jeweilige Hexagon wird zu einem Wunder der Geschichte, welches ein Land so besonders macht, das es kulturell überleben wird und
+			//somit in gewisser Hinsicht für sich und seine kulturellen Anhänger gewonnen hat.
+			//(erst kosmetisch; Diese Funktion wird von der Kauffunktion aufgerufen, die die tatsächlichen Resourcenberechnungen ändert.)
 			function convertIntoWonder(pos) {
 				
 				var hexagonTop = document.getElementById(pos).childNodes[0].childNodes;
@@ -252,10 +279,13 @@
 				
 			}
 
-
+			//Hexagons sind die Bauteile des Spielfeldes und werden mit dieser Funktion erschaffen.
+			//Zudem werden in dieser Funktion EventHandler für jedes gespawnte Hexagon erschaffen, die nach einem Linksklick hören.
+			//Ganz unten im Programm werden Variablen Werte zugewiesen (siehe Zeile 638). Diese Variablen bestimmen den Baumodus, also welches
+            //Gebäude bei dem Fall eines Linksklickes erbaut wird.			
 			function buildHexagon(column) {
 				
-				//Konstruiert ein Sechseck
+				//Konstruiert ein Sechseck nach der üblichen im Internet populären Methode (4 Rechtecke mit Dreieckunterteilung)
 				var hexagon = document.createElement("DIV");
 				hexagon.classList.add("hexagon");
 				
@@ -287,8 +317,8 @@
 
 				document.getElementById(column).appendChild(hexagon);  
 				
-				//Zählt die Sechsecke je Reihe und weißt ihn Nummern zu
-				if(column == "column-3") {
+				//Zählt die Sechsecke je Reihe und weißt ihn Nummern zu um später geziehlt auf sie zu zugreifen zukönnen.
+				if(column == "column-3") { //Folie 2_1
 					column_3_Count ++; 
 					hexagon.id = "column-3_"+column_3_Count;
 				}
@@ -310,17 +340,17 @@
 				}	
 				
 				
-				hexagon.addEventListener("click", ()=> 
+				hexagon.addEventListener("click", ()=>  //Folie 2_2
 				{
 					let id = hexagon.id;
 
-					if(Boolean(buyHouseM)) {
+					if(Boolean(buyHouseM)) { //Bsp. Falls die Variable buyHouseM(ode) den Wert true besitzt, wird ein Haus bei Linksklick gebaut.
 						buildHouse(id)
 					}
-					if(Boolean(buyLandM)) {
+					if(Boolean(buyLandM)) { //Hier würde ein Farmland erbaut werden.
 						buyLand(id)
 					}
-					if(Boolean(buyForesterM)) {
+					if(Boolean(buyForesterM)) { //...
 						buyForest(id)
 					}
 					if(Boolean(buyQuarryM)) {
@@ -338,7 +368,7 @@
 				
 			}
 
-
+			//inspiriert von: https://www.youtube.com/watch?v=vbcddulL-YM&ab_channel=SoySudhanshuCodes, jedoch nur die Ästhetik des Hauses(CSS) und nicht die Methode(JS).
 			function constructHouse(posHouse) {
 				
 				
@@ -387,7 +417,7 @@
 					garage.appendChild(wallGarage);
 
 
-				//Hausbauteile bekommen ihre IDs
+				//Hausbauteile bekommen ihre IDs, nötig für die CSS stylierung
 				house.id = "house";
 				
 				front.id = "front";
@@ -413,9 +443,9 @@
 
 
 
-
-			//Spiel Logik
-
+			//--------------------------------------
+			//-----------Spiel Logik
+			//--------------------------------------
 
 			function buildHouse(housePos) {
 				buyAmount = document.getElementById("buyAmount").value //buyAmount wird bei Ausführung d. F. immer neu geladen
@@ -425,7 +455,7 @@
 					buyAmount = 1
 				}
 				
-				if(gold >= 100 * buyAmount && wood >= 50 * buyAmount && stone >= 20 * buyAmount && buyAmount > 0)
+				if(gold >= 100 * buyAmount && wood >= 50 * buyAmount && stone >= 20 * buyAmount && buyAmount > 0) //<- Die Kosten des Gebäudes mal der Größe des Kaufes
 				{
 					gold -= 100 * buyAmount
 					wood -= 50 * buyAmount
@@ -449,7 +479,7 @@
 				{
 					buyAmount = 1
 				}
-				if(gold >= 20 * buyAmount && buyAmount > 0) {
+				if(gold >= 20 * buyAmount && buyAmount > 0) {  //<- Die Kosten des Gebäudes mal der Größe des Kaufes
 					land += 1 * buyAmount
 					foodModifier += 1 * buyAmount
 					gold -= 20 * buyAmount
@@ -474,7 +504,7 @@
 				{
 					buyAmount = 1
 				}
-				if(gold >= 20 * buyAmount && buyAmount > 0) {
+				if(gold >= 20 * buyAmount && buyAmount > 0) {  //<- Die Kosten des Gebäudes mal der Größe des Kaufes
 					forest += 1 * buyAmount
 					woodModifier += 0.3 * buyAmount
 					gold -= 20 * buyAmount
@@ -499,7 +529,7 @@
 				{
 					buyAmount = 1
 				}
-				if(gold >= 200 * buyAmount && buyAmount > 0) {
+				if(gold >= 200 * buyAmount && buyAmount > 0) {  //<- Die Kosten des Gebäudes mal der Größe des Kaufes
 					quarry += 1 * buyAmount
 					stoneModifier += 0.1 * buyAmount
 					gold -= 200 * buyAmount
@@ -591,11 +621,11 @@
 				if(food > 0)
 				{
 					populationModifier = 1 + Math.floor(population/10)
-					}
+				}
 			}
 
 			function updateStats() {
-				//Updatet die Resourcenanzeige
+				//Updatet die Resourcenanzeige (dies ist unbedingt nötig in JS, sonst würden die Labels sich nie anpassen)
 				//Resourcen
 				goldLabel.innerHTML = gold+" "+"("+goldModifier+")";
 				foodLabel.innerHTML = food+" "+"("+foodModifier+")";
@@ -608,6 +638,7 @@
 				//console.log(" buyHouse: "+Boolean(buyHouseM)+"\n" +" buyLand: "+Boolean(buyLandM)+"\n"+" buyForester: "+Boolean(buyForesterM)+"\n"+" buyQuarry: "+Boolean(buyQuarryM)+"\n"+" buyWonder: "+Boolean(buyWonderM))
 			}
 
+			//Sieges Nachricht erschein nach dem Bau des ersten Wonders genau 1 mal
 			function checkWin() {
 				if(wonder === 1) {
 					alert("Ihr seid Siegreich Mylord!")
@@ -617,7 +648,8 @@
 			}
 			
 
-			function buyHouseMode() {
+			//Die buy__Modes bestimmen das gebaute Gebäude nach einem Linksklick 
+			function buyHouseMode() { //Folie 2_2_1
 				buyHouseM = true
 				buyLandM = false
 				buyForesterM = false

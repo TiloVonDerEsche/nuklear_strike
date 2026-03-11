@@ -7,13 +7,162 @@
 			}
 
 			/*--------------------------------------
+			-		    Hauptmenü
+			---------------------------------------*/
+			.background, .tut-background {
+				width: 1250px;
+				background-color: #1c1715;
+				margin: 2vh 0 0 18vw;
+			}
+			
+			.menu-title {
+				color: #ede9e4;
+				font-size: 7em;
+				margin: 0 0 0 300px ;
+			}
+			
+			.menu-btn {
+				background-color: #63493f;
+				border-radius: 5px;	
+				padding: 0px;
+				margin: 30px 420px;
+				font-size: xx-large;
+				height: 150px;
+				width: 400px;
+			}
+			
+			.menu-btn-container {
+				margin:  200px 0 -400px 0;
+			}
+			
+			.menu-animations {
+				display: flex;
+				margin: 0 0 0 160px;
+			}
+			
+			.house-menu {
+				display: flex;
+				flex-direction: row-reverse;
+				align-items: flex-end;
+				
+				animation: spin5 3s infinite linear;
+				
+				transform-origin: 60% 100%;
+			}
+			
+			#feldProp-menu, #foresterProp-menu, #quarryProp-menu, #wonderProp-menu {
+				transform-origin: 26% 30%;
+				width: 256px;
+				height: 256px;
+			}
+			
+			#feldProp-menu {
+				animation: spin1 3s infinite linear;
+			}
+			
+			#foresterProp-menu{
+				animation: spin2 3s infinite linear;
+			}
+			#quarryProp-menu{
+				animation: spin3 3s infinite linear;
+			}
+			#wonderProp-menu{
+				animation: spin4 3s infinite linear;
+			}
+			
+			@-webkit-keyframes spin1{
+				0% { -webkit-transform: rotate(0deg);}
+				100% { -webkit-transform: rotate(360deg);}
+			}
+			
+			@-webkit-keyframes spin2{
+				0% { -webkit-transform: rotate(0deg);}
+				100% { -webkit-transform: rotate(360deg);}
+			}
+			
+			@-webkit-keyframes spin3{
+				0% { -webkit-transform: rotate(0deg);}
+				100% { -webkit-transform: rotate(360deg);}
+			}
+			
+			@-webkit-keyframes spin4{
+				0% { -webkit-transform: rotate(0deg);}
+				100% { -webkit-transform: rotate(360deg);}
+			}
+			
+			@-webkit-keyframes spin5{
+				0% { -webkit-transform: rotate(0deg);}
+				100% { -webkit-transform: rotate(360deg);}
+			}
+			
+			
+			
+			
+			/*--------------------------------------
+			-		    Tutorial & Credits
+			---------------------------------------*/
+			.tut-helpful {
+				display: flex;
+			}
+			
+			
+			.tut-des {
+				margin: 50px 0 0 0;
+			}
+			
+			.tut-tips {
+				padding: 50px;
+				text-align: center;
+			}
+			
+			.tut-btn, .credit-btn, .game-btn {
+				background-color: #63493f;
+				border-radius: 5px;	
+				padding: 0px;
+				font-size: xx-large;
+				height: 75px;
+				width: 200px;
+			}
+			
+			.game-btn {
+				margin: 10px 0 0 320px;
+				position: absolute;
+			}
+			
+			.tut-lbl, .tut-lbl1 , .credit-text {
+				font-size: xx-large;
+				color: #ede9e4;
+			}
+			
+			.tut-btn:hover,  .menu-btn:hover {
+				opacity: 50%;
+			}
+			
+			.credit-text {
+				text-align: center;
+			}
+			
+			.credit-studio {
+				font-size: 2.5em;
+			}
+			
+			.tut-btn {
+				margin: 0 0 0 1040px;
+			}
+			
+			.credit-btn {
+				margin: 270px 0 0 1040px;
+			}
+		
+			
+			
+			/*--------------------------------------
 			-		    Spielbrett
 			---------------------------------------*/
 			#Spielbrett {
 				width: 1250px;
-				height: 1180px;
 				background-color: #1c1715;
-				margin: 0 0 0 26vw;
+				margin: 0 0 0 18vw;
 			}
 
 			footer {
